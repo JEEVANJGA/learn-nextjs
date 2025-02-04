@@ -4,8 +4,8 @@ Repository created for tracking NextJs - learning
 
 ## Project Notes & Tracker
 
-- Project Tracker - [Tracker](Notes/Progress-Tracker.md)
-- Project Notes - [Notes](Notes/Notes.md)
+- Project Tracker - <a href="Notes/Progress-Tracker.md" target="_blank">Tracker</a>
+- Project Notes - <a href="Notes/Notes.md" target="_blank">Notes</a>
 
 ## Notes that got generated while creating Next.js app
 
