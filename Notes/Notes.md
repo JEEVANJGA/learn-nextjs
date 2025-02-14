@@ -57,3 +57,13 @@
 - In layout.tsx file, simply add the page layout you want across all the pages.
 - Above change can be implemented by default in root layout file.
 - if you want to add specific layout changes for a particular route, you can do it by adding layout.tsx file to the respective route folder directory.
+
+## 4. Route Groups
+- if you want to create specific layout for a specific route, then you have to change the structure of folders with route groups.
+- helps in organoizing route groups and project structure, without impacting the url path.
+- create folders with `()`, for root route group create `(root)` and for dashboard route group create `(dashboard)` folders inside `app` folder.
+- move dashboard folder into `(dashboard)` folder.
+- move about folder and page.tsx from `app` folder into `(dashboard)` folder.
+- now create a `layout.tsx` file inside  `(root)` folder.
+- move `layout.tsx` file from dashboard folder to `(dashboard)` folder.
+- route group folder name wont be included in the route path, its purpose is to group various routes that needs a common layout and other features ( if available ).
