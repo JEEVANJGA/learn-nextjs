@@ -235,3 +235,10 @@ const PostPage = ({ post }) => {
 
 export default PostPage;
 ```
+
+## 7. Error Handling
+
+### error.[j/t]s
+- Errors will bubble up to the nearest `error.tsx` file available.
+- You can create an `error.tsx` file within the `(root)` folder dedicated to root level.
+- If you want a global error handler, you could create one at the `app` folder level with `global-error.tsx` file name.
