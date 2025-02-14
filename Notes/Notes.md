@@ -52,3 +52,8 @@
 - Ensure that the `app` directory is at the root of your project.
 - Dynamic routes can be nested and combined with static routes.
 - Use `getStaticProps` or `getServerSideProps` for data fetching in dynamic routes.
+
+## 3. Layouts
+- In layout.tsx file, simply add the page layout you want across all the pages.
+- Above change can be implemented by default in root layout file.
+- if you want to add specific layout changes for a particular route, you can do it by adding layout.tsx file to the respective route folder directory.
