@@ -124,33 +124,31 @@
   │       ├── page.tsx  // Dashboard page
   ```
 
-## 5. API Routes
 
-- Next.js allows you to create API routes inside the `pages/api` directory.
-- Each file in this directory is mapped to `/api/*` and will be treated as an API endpoint.
-- Example of a simple API route:
-  ```jsx
-  // pages/api/hello.js
-  export default function handler(req, res) {
-    res.status(200).json({ message: "Hello, world!" });
-  }
-  ```
-- You can use dynamic API routes by creating files with square brackets in the `pages/api` directory.
-  ```plaintext
-  pages/
-  ├── api/
-  │   ├── [id].js  // Dynamic API route
-  ```
-- Example of a dynamic API route:
-  ```jsx
-  // pages/api/[id].js
-  export default function handler(req, res) {
-    const { id } = req.query;
-    res.status(200).json({ message: `ID: ${id}` });
-  }
-  ```
+## 5. Error Handling
 
-## 6. Data Fetching
+### error.[j/t]s
+
+- Errors will bubble up to the nearest `error.tsx` file available.
+- You can create an `error.tsx` file within the `(root)` folder dedicated to root level.
+- If you want a global error handler, you could create one at the `app` folder level with `global-error.tsx` file name.
+
+## 6. Loading UIs
+
+- works very simiarly to error handling.
+- can be handled by adding `loading.tsx` file in respective folder.
+- In that you can add any kind of loader/spinner
+- As your pages loads, this component will be shown first until the page.tsx gets rendered
+
+## 7. Additional topics that can be explored 
+
+1. Parallel Routes
+2. Interception Routes
+3. localization routes
+
+These can be explored from NextJs documentation
+
+## 8. Data Fetching
 
 - Next.js provides several methods for data fetching in your components.
 - `getStaticProps`: Fetch data at build time.
@@ -249,27 +247,30 @@ const PostPage = ({ post }) => {
 export default PostPage;
 ```
 
-## 7. Error Handling
 
-### error.[j/t]s
+## 9. API Routes
 
-- Errors will bubble up to the nearest `error.tsx` file available.
-- You can create an `error.tsx` file within the `(root)` folder dedicated to root level.
-- If you want a global error handler, you could create one at the `app` folder level with `global-error.tsx` file name.
-
-## 8. Loading UIs
-
-- works very simiarly to error handling.
-- can be handled by adding `loading.tsx` file in respective folder.
-- In that you can add any kind of loader/spinner
-- As your pages loads, this component will be shown first until the page.tsx gets rendered
-
-## 9. Additional topics that can be explored 
-
-1. Parallel Routes
-2. Interception Routes
-3. localization routes
-
-These can be explored from NextJs documentation
-
+- Next.js allows you to create API routes inside the `pages/api` directory.
+- Each file in this directory is mapped to `/api/*` and will be treated as an API endpoint.
+- Example of a simple API route:
+  ```jsx
+  // pages/api/hello.js
+  export default function handler(req, res) {
+    res.status(200).json({ message: "Hello, world!" });
+  }
+  ```
+- You can use dynamic API routes by creating files with square brackets in the `pages/api` directory.
+  ```plaintext
+  pages/
+  ├── api/
+  │   ├── [id].js  // Dynamic API route
+  ```
+- Example of a dynamic API route:
+  ```jsx
+  // pages/api/[id].js
+  export default function handler(req, res) {
+    const { id } = req.query;
+    res.status(200).json({ message: `ID: ${id}` });
+  }
+  ```
 
