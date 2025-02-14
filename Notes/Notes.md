@@ -54,9 +54,43 @@
 - Use `getStaticProps` or `getServerSideProps` for data fetching in dynamic routes.
 
 ## 3. Layouts
-- In layout.tsx file, simply add the page layout you want across all the pages.
-- Above change can be implemented by default in root layout file.
-- if you want to add specific layout changes for a particular route, you can do it by adding layout.tsx file to the respective route folder directory.
+
+- In `layout.tsx` file, define the layout you want to apply across all pages.
+- This layout can be implemented by default in the root layout file.
+- If you want to add specific layout changes for a particular route, you can do so by adding a `layout.tsx` file to the respective route folder.
+- Example of a root layout component:
+    ```jsx
+    // app/layout.tsx
+    const RootLayout = ({ children }) => {
+        return (
+            <html>
+                <body>
+                    <header>Header Content</header>
+                    <main>{children}</main>
+                    <footer>Footer Content</footer>
+                </body>
+            </html>
+        );
+    };
+
+    export default RootLayout;
+    ```
+- Example of a route-specific layout component:
+    ```jsx
+    // app/dashboard/layout.tsx
+    const DashboardLayout = ({ children }) => {
+        return (
+            <div>
+                <nav>Dashboard Navigation</nav>
+                <main>{children}</main>
+            </div>
+        );
+    };
+
+    export default DashboardLayout;
+    ```
+- Layouts can be nested, allowing you to create complex page structures with shared components.
+- Ensure that the `layout.tsx` file is placed correctly to apply the desired layout to the intended routes.
 
 ## 4. Route Groups
 - if you want to create specific layout for a specific route, then you have to change the structure of folders with route groups.
