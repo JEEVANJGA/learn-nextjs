@@ -3,7 +3,7 @@
 ## 1. Project Setup
 
 - Run `npx create-next-app@latest` to create a new Next.js project.
-- If you want to create the project in the current directory, run `npx create-next-app@latest .`. Make sure your cuurent directory name is in lower-case.
+- If you want to create the project in the current directory, run `npx create-next-app@latest .`. Make sure your current directory name is in lower-case.
 - Follow the prompts to set up your project with the desired configuration.
 - After the setup is complete, navigate to your project directory and run `npm run dev` to start the development server.
 
@@ -93,11 +93,145 @@
 - Ensure that the `layout.tsx` file is placed correctly to apply the desired layout to the intended routes.
 
 ## 4. Route Groups
-- if you want to create specific layout for a specific route, then you have to change the structure of folders with route groups.
-- helps in organoizing route groups and project structure, without impacting the url path.
-- create folders with `()`, for root route group create `(root)` and for dashboard route group create `(dashboard)` folders inside `app` folder.
-- move dashboard folder into `(dashboard)` folder.
-- move about folder and page.tsx from `app` folder into `(dashboard)` folder.
-- now create a `layout.tsx` file inside  `(root)` folder.
-- move `layout.tsx` file from dashboard folder to `(dashboard)` folder.
-- route group folder name wont be included in the route path, its purpose is to group various routes that needs a common layout and other features ( if available ).
+- If you want to create a specific layout for a specific route, then you have to change the structure of folders with route groups.
+- Helps in organizing route groups and project structure, without impacting the URL path.
+- Create folders with `()`, for root route group create `(root)` and for dashboard route group create `(dashboard)` folders inside `app` folder.
+- Move the dashboard folder into the `(dashboard)` folder.
+- Move the about folder and page.tsx from the `app` folder into the `(dashboard)` folder.
+- Now create a `layout.tsx` file inside the `(root)` folder.
+- Move the `layout.tsx` file from the dashboard folder to the `(dashboard)` folder.
+- Route group folder names won't be included in the route path, their purpose is to group various routes that need a common layout and other features (if available).
+- Example of a route group structure:
+    ```plaintext
+    app/
+    ├── (root)/
+    │   ├── layout.tsx  // Root layout
+    ├── (dashboard)/
+    │   ├── layout.tsx  // Dashboard layout
+    │   ├── about/
+    │   │   ├── page.tsx  // About page
+    │   ├── dashboard/
+    │       ├── page.tsx  // Dashboard page
+    ```
+
+## 5. API Routes
+
+- Next.js allows you to create API routes inside the `pages/api` directory.
+- Each file in this directory is mapped to `/api/*` and will be treated as an API endpoint.
+- Example of a simple API route:
+    ```jsx
+    // pages/api/hello.js
+    export default function handler(req, res) {
+        res.status(200).json({ message: 'Hello, world!' });
+    }
+    ```
+- You can use dynamic API routes by creating files with square brackets in the `pages/api` directory.
+    ```plaintext
+    pages/
+    ├── api/
+    │   ├── [id].js  // Dynamic API route
+    ```
+- Example of a dynamic API route:
+    ```jsx
+    // pages/api/[id].js
+    export default function handler(req, res) {
+        const { id } = req.query;
+        res.status(200).json({ message: `ID: ${id}` });
+    }
+    ```
+
+## 6. Data Fetching
+
+- Next.js provides several methods for data fetching in your components.
+- `getStaticProps`: Fetch data at build time.
+- `getServerSideProps`: Fetch data on each request.
+- `getStaticPaths`: Define dynamic routes to be pre-rendered based on data.
+
+### Example of `getStaticProps`:
+```jsx
+// pages/index.js
+export async function getStaticProps() {
+    const res = await fetch('https://api.example.com/data');
+    const data = await res.json();
+
+    return {
+        props: {
+            data,
+        },
+    };
+}
+
+const HomePage = ({ data }) => {
+    return (
+        <div>
+            <h1>Home Page</h1>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
+    );
+};
+
+export default HomePage;
+```
+
+### Example of `getServerSideProps`:
+```jsx
+// pages/index.js
+export async function getServerSideProps() {
+    const res = await fetch('https://api.example.com/data');
+    const data = await res.json();
+
+    return {
+        props: {
+            data,
+        },
+    };
+}
+
+const HomePage = ({ data }) => {
+    return (
+        <div>
+            <h1>Home Page</h1>
+            <pre>{JSON.stringify(data, null, 2)}</pre>
+        </div>
+    );
+};
+
+export default HomePage;
+```
+
+### Example of `getStaticPaths` and `getStaticProps` for dynamic routes:
+```jsx
+// pages/posts/[id].js
+export async function getStaticPaths() {
+    const res = await fetch('https://api.example.com/posts');
+    const posts = await res.json();
+
+    const paths = posts.map((post) => ({
+        params: { id: post.id.toString() },
+    }));
+
+    return { paths, fallback: false };
+}
+
+export async function getStaticProps({ params }) {
+    const res = await fetch(`https://api.example.com/posts/${params.id}`);
+    const post = await res.json();
+
+    return {
+        props: {
+            post,
+        },
+    };
+}
+
+const PostPage = ({ post }) => {
+    return (
+        <div>
+            <h1>{post.title}</h1>
+            <p>{post.content}</p>
+        </div>
+    );
+};
+
+export default PostPage;
+```
