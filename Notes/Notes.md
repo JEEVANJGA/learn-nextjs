@@ -274,3 +274,5 @@ export default PostPage;
   }
   ```
 
+## 10. SEO & Metadata
+- Refer : https://nextjs.org/docs/app/building-your-application/optimizing/metadata 
