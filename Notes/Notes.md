@@ -1,22 +1,24 @@
 # Next.js Application Development Notes
 
-## 1. Project Setup
+## Step-01
+
+### 1. Project Setup
 
 - Run `npx create-next-app@latest` to create a new Next.js project.
 - If you want to create the project in the current directory, run `npx create-next-app@latest .`. Make sure your current directory name is in lower-case.
 - Follow the prompts to set up your project with the desired configuration.
 - After the setup is complete, navigate to your project directory and run `npm run dev` to start the development server.
 
-## 2. Routing
+### 2. Routing
 
 - Next.js uses a file-based routing system.
 - By default, the `app` directory contains the home page route (`page.tsx`).
 
-### Adding New Routes
+#### Adding New Routes
 
 - To add new routes, create a new folder in the `app` directory with the desired route name, and within this folder, create a `page.tsx` file, e.g., `app/about/page.tsx` for `/about`.
 
-### Nested Routes
+#### Nested Routes
 
 - For nested routes, create a folder within the `app` directory with the parent route name, and within this folder, create additional folders with `page.tsx` files for sub-routes.
   ```plaintext
@@ -27,7 +29,7 @@
   │       ├── page.tsx  // accessible at /blog/first-post
   ```
 
-### Dynamic Routes
+#### Dynamic Routes
 
 - For dynamic routes, create a folder with the route name in square brackets, and within this folder, create a `page.tsx` file, e.g., `app/product/[id]/page.tsx`.
   ```plaintext
@@ -52,13 +54,13 @@
   export default ProductPage;
   ```
 
-### Important Notes
+#### Important Notes
 
 - Ensure that the `app` directory is at the root of your project.
 - Dynamic routes can be nested and combined with static routes.
 - Use `getStaticProps` or `getServerSideProps` for data fetching in dynamic routes.
 
-## 3. Layouts
+### 3. Layouts
 
 - In `layout.tsx` file, define the layout you want to apply across all pages.
 - This layout can be implemented by default in the root layout file.
@@ -101,7 +103,7 @@
 - Layouts can be nested, allowing you to create complex page structures with shared components.
 - Ensure that the `layout.tsx` file is placed correctly to apply the desired layout to the intended routes.
 
-## 4. Route Groups
+### 4. Route Groups
 
 - If you want to create a specific layout for a specific route, then you have to change the structure of folders with route groups.
 - Helps in organizing route groups and project structure, without impacting the URL path.
@@ -124,23 +126,22 @@
   │       ├── page.tsx  // Dashboard page
   ```
 
+### 5. Error Handling
 
-## 5. Error Handling
-
-### error.[j/t]s
+#### error.[j/t]s
 
 - Errors will bubble up to the nearest `error.tsx` file available.
 - You can create an `error.tsx` file within the `(root)` folder dedicated to root level.
 - If you want a global error handler, you could create one at the `app` folder level with `global-error.tsx` file name.
 
-## 6. Loading UIs
+### 6. Loading UIs
 
 - works very simiarly to error handling.
 - can be handled by adding `loading.tsx` file in respective folder.
 - In that you can add any kind of loader/spinner
 - As your pages loads, this component will be shown first until the page.tsx gets rendered
 
-## 7. Additional topics that can be explored 
+### 7. Additional topics that can be explored
 
 1. Parallel Routes
 2. Interception Routes
@@ -148,14 +149,14 @@
 
 These can be explored from NextJs documentation
 
-## 8. Data Fetching
+### 8. Data Fetching
 
 - Next.js provides several methods for data fetching in your components.
 - `getStaticProps`: Fetch data at build time.
 - `getServerSideProps`: Fetch data on each request.
 - `getStaticPaths`: Define dynamic routes to be pre-rendered based on data.
 
-### Example of `getStaticProps`:
+#### Example of `getStaticProps`:
 
 ```jsx
 // pages/index.js
@@ -182,7 +183,7 @@ const HomePage = ({ data }) => {
 export default HomePage;
 ```
 
-### Example of `getServerSideProps`:
+#### Example of `getServerSideProps`:
 
 ```jsx
 // pages/index.js
@@ -209,7 +210,7 @@ const HomePage = ({ data }) => {
 export default HomePage;
 ```
 
-### Example of `getStaticPaths` and `getStaticProps` for dynamic routes:
+#### Example of `getStaticPaths` and `getStaticProps` for dynamic routes:
 
 ```jsx
 // pages/posts/[id].js
@@ -247,8 +248,7 @@ const PostPage = ({ post }) => {
 export default PostPage;
 ```
 
-
-## 9. API Routes
+### 9. API Routes
 
 - Next.js allows you to create API routes inside the `pages/api` directory.
 - Each file in this directory is mapped to `/api/*` and will be treated as an API endpoint.
@@ -274,5 +274,6 @@ export default PostPage;
   }
   ```
 
-## 10. SEO & Metadata
-- Refer : https://nextjs.org/docs/app/building-your-application/optimizing/metadata 
+### 10. SEO & Metadata
+
+- Refer : https://nextjs.org/docs/app/building-your-application/optimizing/metadata
