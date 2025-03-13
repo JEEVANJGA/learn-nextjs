@@ -408,3 +408,8 @@ export default PostPage;
   ```
 
 - run `npm run lint:fix`
+
+### Setup Tailwind css
+
+- take Solution related config and theme style informations from reference [commit](https://github.com/adrianhajdin/jsmasterypro_devflow/tree/13c179cb2282e1b1587a070e89a07740e94e4d8d) and update `global.css` file and `tailwind.config.ts` file.
+-
