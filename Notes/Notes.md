@@ -418,3 +418,9 @@ export default PostPage;
 
 - Download font files from reference [commit](https://github.com/adrianhajdin/jsmasterypro_devflow/tree/4af15966ae046fae2645613d8efb8313c5a530e6).
 - Make necessary file changes in root `layout.tsx` file & `global.css` file , to use the downloaded font files.
+
+### Setup Assets & Metadata
+
+- Download assets from [resource](https://drive.google.com/file/d/1nBru53dqIY4__A_WsburhpdiWUbdbncY/view?usp=sharing)
+- update assets in public fiolder.
+- update Metadata information in `layout.tsx` file
