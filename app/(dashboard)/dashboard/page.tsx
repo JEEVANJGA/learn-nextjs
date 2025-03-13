@@ -1,8 +1,8 @@
 const page = () => {
   return (
     <main>
-      <div className="my-10 px-24 bg-white">
-        <div className="py-5 flex flex-row justify-center font-bold text-5xl shadow-xl">
+      <div className="my-10 bg-white px-24">
+        <div className="flex flex-row justify-center py-5 text-5xl font-bold shadow-xl">
           Main Dashboard
         </div>
       </div>
