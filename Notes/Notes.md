@@ -408,3 +408,19 @@ export default PostPage;
   ```
 
 - run `npm run lint:fix`
+
+### Setup Tailwind css
+
+- take Solution related config and theme style informations from reference [commit](https://github.com/adrianhajdin/jsmasterypro_devflow/tree/13c179cb2282e1b1587a070e89a07740e94e4d8d) and update `global.css` file and `tailwind.config.ts` file.
+- Figma Reference :[Figma Design](https://www.figma.com/design/2vtjgodtBxTdg0zOUHPvXh/JSM-Pro---DevOverflow?node-id=494-4291)
+
+### Setup Fonts
+
+- Download font files from reference [commit](https://github.com/adrianhajdin/jsmasterypro_devflow/tree/4af15966ae046fae2645613d8efb8313c5a530e6).
+- Make necessary file changes in root `layout.tsx` file & `global.css` file , to use the downloaded font files.
+
+### Setup Assets & Metadata
+
+- Download assets from [resource](https://drive.google.com/file/d/1nBru53dqIY4__A_WsburhpdiWUbdbncY/view?usp=sharing)
+- update assets in public fiolder.
+- update Metadata information in `layout.tsx` file
