@@ -1,6 +1,6 @@
 # Next.js Application Development Notes
 
-## Step-01
+## Step-00
 
 ### 1. Project Setup
 
@@ -277,3 +277,134 @@ export default PostPage;
 ### 10. SEO & Metadata
 
 - Refer : https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+
+## Step-01
+
+### Project Setup
+
+- create a Next.js project following steps from [1. Project Setup](#1-project-setup) under [Step-00](#step-00).
+
+### Setup Linting
+
+- Run `npm i eslint-config-standard eslint-plugin-tailwindcss eslint-config-prettier prettier --legacy-peer-deps`
+- Run `npm i eslint-plugin-import -D --legacy-peer-deps`
+- Run `npm i @eslint/compat @eslint/eslintrc @eslint/js -D --legacy-peer-deps`
+- Run `npm i eslint-plugin-n -D --legacy-peer-deps`
+- Run `npm i eslint-plugin-promise -D --legacy-peer-deps`
+- update `eslint.config.mjs` with below content :
+
+  ```js
+  import path from "node:path";
+  import { fileURLToPath } from "node:url";
+
+  import { FlatCompat } from "@eslint/eslintrc";
+  import js from "@eslint/js";
+  import importPlugin from "eslint-plugin-import";
+
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  const compat = new FlatCompat({
+    baseDirectory: __dirname,
+    recommendedConfig: js.configs.recommended,
+    allConfig: js.configs.all,
+  });
+
+  const config = [
+    {
+      ignores: ["components/ui/**/*"],
+    },
+    ...compat.extends(
+      "next/core-web-vitals",
+      "next/typescript",
+      "standard",
+      "plugin:tailwindcss/recommended",
+      "prettier"
+    ),
+    {
+      plugins: { import: importPlugin },
+      rules: {
+        "import/order": [
+          "error",
+          {
+            groups: [
+              "builtin",
+              "external",
+              "internal",
+              ["parent", "sibling"],
+              "index",
+              "object",
+            ],
+            "newlines-between": "always",
+            pathGroups: [
+              {
+                pattern: "@app/**",
+                group: "external",
+                position: "after",
+              },
+            ],
+            pathGroupsExcludedImportTypes: ["builtin"],
+            alphabetize: {
+              order: "asc",
+              caseInsensitive: true,
+            },
+          },
+        ],
+        "comma-dangle": "off",
+      },
+    },
+    {
+      files: ["**/*.ts", "**/*.tsx"],
+      rules: {
+        "no-undef": "off",
+      },
+    },
+  ];
+
+  export default config;
+  ```
+
+- steps to integrate eslint & prettier into VS-Code, follow below steps :
+
+  - create `.vscode` within the project folder.
+  - create `settings.json` within `.vscode` folder.
+  - will make vscode to save eslint or prettier recommendations you save or exit the file.
+  - update with below content :
+
+  ```json
+  {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": "explicit",
+      "source.addMissingImports": "explicit"
+    },
+    "prettier.tabWidth": 2,
+    "prettier.useTabs": false,
+    "prettier.semi": true,
+    "prettier.singleQuote": false,
+    "prettier.jsxSingleQuote": false,
+    "prettier.trailingComma": "es5",
+    "prettier.arrowParens": "always",
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[typescriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascriptreact]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "typescript.tsdk": "node_modules/typescript/lib"
+  }
+  ```
+
+- After making all above changes, add a new script to `package.json` file :
+
+  ```json
+    "lint:fix": "next lint --fix"
+  ```
+
+- run `npm run lint:fix`
