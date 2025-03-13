@@ -3,12 +3,12 @@ import Link from "next/link";
 const page = () => {
   return (
     <main>
-      <div className="my-10 px-24 bg-white">
-        <div className="py-5 flex flex-row justify-center font-bold text-5xl shadow-xl">
+      <div className="my-10 bg-white px-24">
+        <div className="flex flex-row justify-center py-5 text-5xl font-bold shadow-xl">
           Users
         </div>
         <div className="mt-4">
-          <h1 className="font-bold text-2xl">Dashboard Users</h1>
+          <h1 className="text-2xl font-bold">Dashboard Users</h1>
           <ul className="mt-2">
             <li>
               <Link href="/dashboard/users/1">User 1</Link>
