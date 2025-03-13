@@ -11,7 +11,9 @@
 
 - [x] Configure ESLint
 - [x] Configure Prettier
-- [x] Setup TypeScript
+- [x] Setup Tailwind css & Theme (Initial)
+- [x] Setup Fonts
+- [x] Setup Assets & Metadata
 
 ## 3. Application Structure
 
