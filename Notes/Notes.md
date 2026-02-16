@@ -424,3 +424,90 @@ export default PostPage;
 - Download assets from [resource](https://drive.google.com/file/d/1nBru53dqIY4__A_WsburhpdiWUbdbncY/view?usp=sharing)
 - update assets in public fiolder.
 - update Metadata information in `layout.tsx` file
+
+## Step-02
+
+### Enforcing React Version Consistency
+
+- Added the following to `package.json`:
+
+  ```json
+  "packageManager": "npm@10.8.2"
+  "overrides": {
+    "react": "$react",
+    "react-dom": "$react-dom"
+  }
+  ```
+
+- **Explanation:**
+  - The `packageManager` field specifies which package manager and version should be used for the project (in this case, npm version 10.8.2). This helps ensure that everyone working on the project uses the same package manager version, reducing environment-related issues.
+  - The `overrides` field (supported by npm v8.3.0+) forces all dependencies and sub-dependencies in the project to use the exact versions of `react` and `react-dom` specified in the root `dependencies`.  
+    This prevents version conflicts and ensures consistency, especially when some packages require different React versions.
+
+### Setup theme
+
+- For theme handling we will use <a href="https://github.com/pacocoursey/next-themes" target="_blank">`next-themes`</a>
+- run `npm i next-themes --legacy-peer-deps`
+
+#### Theme Setup with next-themes
+
+- Created a custom `ThemeProvider` in `context/Theme.tsx` to wrap the `next-themes` provider. This allows for easy theme management and future customization.
+
+  ```tsx
+  // context/Theme.tsx
+  "use client";
+
+  import {
+    ThemeProvider as NextThemeProvider,
+    ThemeProviderProps,
+  } from "next-themes";
+  import React from "react";
+
+  const ThemeProvider = ({ children, ...props }: ThemeProviderProps) => {
+    return <NextThemeProvider {...props}>{children}</NextThemeProvider>;
+  };
+
+  export default ThemeProvider;
+  ```
+
+- Updated `app/layout.tsx` to wrap the application with this `ThemeProvider`, enabling dynamic theme switching (light/dark/system) based on user or system preference.
+
+  ```tsx
+  // app/layout.tsx (excerpt)
+  <ThemeProvider
+    attribute="class"
+    defaultTheme="system"
+    enableSystem
+    disableTransitionOnChange
+  >
+    {children}
+  </ThemeProvider>
+  ```
+
+- **Explanation:**
+  - `attribute="class"`: Applies theme by toggling a CSS class.
+  - `defaultTheme="system"`: Uses the user's system theme by default.
+  - `enableSystem`: Automatically switches theme based on OS preference.
+  - `disableTransitionOnChange`: Prevents CSS transitions when changing themes.
+
+#### Add ShadCN UI
+
+- Run `npx shadcn@latest init`
+- proceed - y
+- style - new york
+- color - slate
+
+#### Add ShadCN UI
+
+- Run `npx shadcn@latest init`
+- If you encounter SSL certificate errors (e.g., "unable to get local issuer certificate"), you can temporarily bypass SSL validation for troubleshooting by running:
+  ```
+  set NODE_TLS_REJECT_UNAUTHORIZED=0
+  npx shadcn@latest init
+  ```
+  > ⚠️ Only use this for local development. For a permanent fix, configure your network or install the required CA certificates.
+- proceed - y
+- style - new york
+- color - slate
+- installation fails due to dependency errors.
+- Run `npm install tailwindcss-animate class-variance-authority lucide-react clsx tailwind-merge --legacy-peer-deps`

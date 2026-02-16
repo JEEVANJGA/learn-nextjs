@@ -14,6 +14,7 @@
 - [x] Setup Tailwind css & Theme (Initial)
 - [x] Setup Fonts
 - [x] Setup Assets & Metadata
+- [x] Theme Setup - next-themes
 
 ## 3. Application Structure
 
